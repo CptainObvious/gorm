@@ -50,6 +50,9 @@ func (scope *Scope) NewDB() *DB {
 	if scope.db != nil {
 		db := scope.db.clone()
 		db.search = nil
+		if scope.db.search != nil && scope.db.search.Unscoped {
+			db.search = &search{ Unscoped: true}
+		}
 		db.Value = nil
 		return db
 	}
